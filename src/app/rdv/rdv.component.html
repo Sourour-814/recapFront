@@ -1,0 +1,157 @@
+<div class="text-center">
+    <h1>Liste des rendez-vous</h1>
+    <br />
+
+    <!-- button of modal-->
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+    >
+      Ajout d'utilisateur
+    </button>
+    <br /><br />
+    <!--fin button-->
+
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Titre</th>
+        <th>Description</th>
+        <th>Date</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+  
+    <tr *ngFor="let rdv of rdvs">
+      
+     <td class="pt-3-half"  contenteditable="true" >{{ rdv.titre }}</td>
+      <td class="pt-3-half" contenteditable="true">{{ rdv.description }}</td>
+      <td class="pt-3-half" contenteditable="true">{{ rdv.date }}</td>
+<!--button of update modal-->
+      <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">modifier</button>&nbsp;&nbsp;
+ <!--fin button-->     
+      <button class="btn btn-outline-danger" (click)="delete(rdv)">supprimer</button>
+      <td></td>
+    </tr>
+  </table>
+
+
+
+<!-- modal-dialog pour ajouter un rdv--->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"> Merci de remplir ce formulaire </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form #myForm ="ngForm">
+        <div class="modal-body">
+            <div class="mb-3">
+                <label class="form-label">Titre </label>
+                <input
+                  [(ngModel)]="rdv.titre"
+                  #nom="ngModel"
+                  type="text"
+                  required
+                  name="titre"
+                  class="form-control"
+                  placeholder="titre..."
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Description </label>
+                <textarea
+                  required
+                  [(ngModel)]="rdv.description"
+                  #adresse="ngModel"
+                  placeholder="description..."
+                  name="description"
+                  class="form-control"
+                ></textarea>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Date </label>
+                <input
+                  [(ngModel)]="rdv.date"
+                  #nom="ngModel"
+                  type="date"
+                  required
+                  name="date"
+                  class="form-control"
+                  
+                />
+              </div>
+         
+        </div>
+    </form>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" [disabled]="myForm.invalid"  (click)="create()" class="btn btn-primary">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- modal to update rdv-->
+  <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"> Vous pouvez modifier le formulaire de RDV </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form #myForm ="ngForm">
+        <div class="modal-body">
+            <div class="mb-3">
+                <label class="form-label">Titre </label>
+                <input
+                  [(ngModel)]="rdv.titre"
+                  
+                  #nom="ngModel"
+                  type="text"
+                  required
+                  name="titre"
+                  class="form-control"
+                  placeholder="titre..."
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Description </label>
+                <textarea
+                  required
+                  [(ngModel)]="rdv.description"
+                 
+                  #adresse="ngModel"
+                  placeholder="description..."
+                  name="description"
+                  class="form-control"
+                ></textarea>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Date </label>
+                <input
+                  [(ngModel)]="rdv.date"
+                  
+                  #nom="ngModel"
+                  type="date"
+                  required
+                  name="date"
+                  class="form-control"
+                  
+                />
+              </div>
+         
+        </div>
+    </form>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" [disabled]="myForm.invalid"  (click)="create()" class="btn btn-primary">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
